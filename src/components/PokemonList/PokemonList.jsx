@@ -5,19 +5,25 @@ import axios from "axios";
 import "./PokemonList.css";
 import Pokemon from "../Pokemon/Pokemon";
 
-const POKEDEX_URL = 'https://pokeapi.co/api/v2/pokemon'
+
 
 function PokemonList() {
+    const [POKEDEX_URL, setPOKEDEX_URL] = useState('https://pokeapi.co/api/v2/pokemon')
 
+    const [nextUrl, setnextUrl] = useState('')
+    const [prevUrl, setprevUrl] = useState('')
     const [PokemonList, setPokimonList] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     async function downloadPokemon() {
+        setIsLoading(true)
         const response = await axios.get(POKEDEX_URL); //this downloads list of 20 pokemon
 
         const pokemonResult = response.data.results //we get the array of pokemon from results(name and url)
 
-        console.log(response.data)
+        console.log("response data", response.data)
+        setnextUrl(response.data.next) //this is the next url to download next 20 pokemons
+        setprevUrl(response.data.previous) //this is the previous url to download previous 20
 
         //iterating over the array of pokimons and using their url,to create an array of promise  
         //that will download those 20 pokemons
@@ -46,17 +52,17 @@ function PokemonList() {
 
     useEffect(() => {
         downloadPokemon();
-    }, []);
+    }, [POKEDEX_URL]);
 
     return (
         <div className="pokemon-list-wrapper">
-            
+
             <div className="pokemon-wrapper">
                 {(isLoading) ? 'Loading...' : PokemonList.map((p) => (<Pokemon name={p.name} image={p.image} key={p.id} />))}
             </div>
             <div className="controls">
-                <button>Prev</button>
-                <button>Next</button>
+                <button disabled={prevUrl == null} onClick={() => { setPOKEDEX_URL(prevUrl) }}>Prev</button>
+                <button disabled={nextUrl == null} onClick={() => { setPOKEDEX_URL(nextUrl) }}>Next</button>
             </div>
         </div>
     );
