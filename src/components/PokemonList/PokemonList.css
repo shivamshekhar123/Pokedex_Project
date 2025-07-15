@@ -4,3 +4,17 @@
     align-items: center;
     margin: 2rem auto;
 }
+
+.pokemon-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.controls>button{
+    padding: 0.5rem 1rem;
+   font-size: 1rem;
+   margin-left: 1rem;
+    
+}
