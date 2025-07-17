@@ -1,16 +1,15 @@
 
-import Pokedex from './components/Pokedex/pokedex.jsx';
-import PokemonList from './components/PokemonList/POkemonList.jsx';
-
+import Pokedex from './components/Pokedex/Pokedex.jsx';
+import CustomRoutes from './routes/CustomRoutes.jsx';
+import React from 'react';
 
 function App() {
  
 
   return (
     <>
-   <Pokedex />
-   <PokemonList/>
-   
+    <CustomRoutes />
+
     </>
   )
 }

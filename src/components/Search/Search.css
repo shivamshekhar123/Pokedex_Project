@@ -1,15 +1,31 @@
-.search-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin:  0 auto;
-
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto 0 auto;
+  width: 100%;
 }
 
-#pokemon-name-search{
-    width: 600px;
-    margin-top: 2rem;
-    padding: 1.5rem;
-    border: 1px solid #c01717;
-  
+#pokemon-name-search {
+  width: 100%;
+  max-width: 600px;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.25rem;
+  border: 2px solid #ff4e50;
+  border-radius: 12px;
+  outline: none;
+  color: #0a9e0c;
+  background-color: #fff7e6;
+  box-shadow: 0 4px 12px rgba(255, 78, 80, 0.3);
+  transition: all 0.3s ease;
+}
+
+#pokemon-name-search::placeholder {
+  color: #ff4e50;
+  opacity: 0.8;
+}
+
+#pokemon-name-search:focus {
+  border-color: #f9d423;
+  box-shadow: 0 0 10px #f9d423;
 }
