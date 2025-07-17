@@ -49,8 +49,7 @@ function PokemonDetails() {
         onMouseOut={e => e.currentTarget.style.color = '#007bff'}
         title="Go back to Pokedex"
       >
-
-        Pokedex
+       Pokédex
       </div>
      
       <div className='pokemon-details'>

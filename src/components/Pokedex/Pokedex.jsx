@@ -6,7 +6,7 @@ import PokemonList from '../PokemonList/POkemonList.jsx'
 function Pokedex() {
   return (
     <div className='pokedex-wrapper'>
-      <h1 id="pokedex-heading">Pokedex</h1>
+      <h1 id="pokedex-heading">Pokédex</h1>
       <Search />
        <PokemonList/>
     </div>
