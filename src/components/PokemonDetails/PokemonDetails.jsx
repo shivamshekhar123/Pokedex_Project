@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './PokemonDetails.css';
 
-
 function PokemonDetails() {
   const id = useParams().id;
-  const [pokemon, setPokemon] = useState('');
+  const [pokemon, setPokemon] = useState({});
   const [typePokemonList, setTypePokemonList] = useState([]);
   const navigate = useNavigate();
 
@@ -24,7 +23,6 @@ function PokemonDetails() {
     });
   }
 
-  // This will fetch similar type Pokémon after `pokemon.types` is loaded
   useEffect(() => {
     if (pokemon.types && pokemon.types.length > 0) {
       async function fetchTypePokemons() {
@@ -61,34 +59,44 @@ function PokemonDetails() {
         Pokédex
       </div>
 
-      <div className='pokemon-details'>
-        <div className='pokemon-name' style={{ color: 'red', textTransform: 'uppercase' }}>
-          Name: {pokemon.name}
+      <div className="details-layout">
+        <div className="pokemon-details">
+          <div className="pokemon-name" style={{ textTransform: 'uppercase' }}>
+            Name: {pokemon.name}
+          </div>
+          <div className="pokemon-image">
+            <img src={pokemon.image} alt={pokemon.name} style={{ height: '150px' }} />
+          </div>
+          <div className="pokemon-id">ID: {pokemon.id}</div>
+          <div className="pokemon-height">Height: {pokemon.height}</div>
+          <div className="pokemon-weight">Weight: {pokemon.weight}</div>
+          <div className="pokemon-abilities">Abilities: {pokemon.abilities}</div>
+          <div className="pokemon-types">
+            Types:{' '}
+            {pokemon.types &&
+              pokemon.types.map((t) => (
+                <div key={t} className="pokemon-type-item">
+                  {t}
+                </div>
+              ))}
+          </div>
         </div>
-        <div className='pokemon-image'>
-          <img src={pokemon.image} alt={pokemon.name} style={{ height: '150px' }} />
-        </div>
-        <div className='pokemon-id'>ID: {pokemon.id}</div>
-        <div className='pokemon-height'>Height: {pokemon.height}</div>
-        <div className='pokemon-weight'>Weight: {pokemon.weight}</div>
-        <div className='pokemon-abilities'>Abilities: {pokemon.abilities}</div>
-        <div className='pokemon-types'>
-          Types:{' '}
-          {pokemon.types &&
-            pokemon.types.map((t) => <div key={t}>{t}</div>)}
-        </div>
-      </div>
 
-      {typePokemonList.length > 0 && (
-        <div>
-          <h3>More {pokemon.types[0]} type Pokémon</h3>
-          <ul>
-            {typePokemonList.map((p) => (
-              <li key={p.pokemon.url}>{p.pokemon.name}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+        {typePokemonList.length > 0 && (
+          <div className="more-pokemon-container">
+            <h3 className="more-pokemon-title">
+              More {pokemon.types && pokemon.types.length > 0 ? pokemon.types[0] : ''} type Pokémon
+            </h3>
+            <ul className="more-pokemon-list">
+              {typePokemonList.map((p) => (
+                <li key={p.pokemon.url} className="more-pokemon-item">
+                  {p.pokemon.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
